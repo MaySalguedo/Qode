@@ -21,7 +21,11 @@ import { AuthService } from '@auth/auth.service';
 		private tokenService: TokenService,
 		private router: Router
 
-	) {}
+	) {
+
+		if (localStorage.getItem('access_token')) this.router.navigate(['/home']);
+
+	}
 
 	public ngOnInit(): void {}
 

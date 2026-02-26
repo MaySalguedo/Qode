@@ -1,0 +1,31 @@
+.qr-modal-content {
+  --background: var(--ion-card-background, #fff);
+  
+  .header-section {
+    margin: 10px 0 25px;
+    h3 { font-weight: 800; font-size: 1.4rem; margin-bottom: 5px; }
+    p { color: var(--ion-color-medium); font-size: 0.9rem; padding: 0 20px; }
+  }
+
+  .qr-frame {
+    display: inline-block;
+    padding: 15px;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    
+    // Esto asegura que el QR generado se adapte bien
+    canvas, img, svg {
+      border-radius: 12px;
+    }
+  }
+
+  .url-box {
+    margin: 0 20px 30px;
+    padding: 12px;
+    background: var(--ion-color-light-tint);
+    border-radius: 10px;
+    word-break: break-all;
+  }
+}

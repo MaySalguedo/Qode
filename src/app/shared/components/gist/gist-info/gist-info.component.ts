@@ -19,9 +19,9 @@ export class GistInfoComponent implements OnInit {
 	public createdAt: string = '';
 	public updatedAt: string = '';
 
-	constructor(public readonly utilService: UtilService) {}
+	public constructor(public readonly utilService: UtilService) {}
 
-	ngOnInit(): void {
+	public ngOnInit(): void {
 		this.isOwner = this.user_id === this.gist.owner.id;
 		
 		// Convertimos el objeto de archivos en un array para iterar más fácil

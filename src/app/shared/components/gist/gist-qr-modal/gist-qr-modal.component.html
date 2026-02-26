@@ -1,0 +1,26 @@
+<ion-content class="ion-padding ion-text-center qr-modal-content">
+	<div class="header-section">
+		<div class="drag-handle"></div>
+		<h3>QR Code</h3>
+		<p>{{ gistTitle }}</p>
+	</div>
+
+	<div class="qr-frame">
+		<qrcode 
+			[qrdata]="gistUrl" 
+			[width]="240" 
+			[errorCorrectionLevel]="'M'"
+			[margin]="2">
+		</qrcode>
+	</div>
+
+	<div class="url-box">
+		<ion-text color="medium">
+			<small>{{ gistUrl }}</small>
+		</ion-text>
+	</div>
+
+	<ion-button expand="block" shape="round" color="dark" (click)="dismiss()">
+		Cerrar
+	</ion-button>
+</ion-content>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { GistQrModalComponent } from '@components/gist/gist-qr-modal/gist-qr-modal.component';
 import { HeaderService } from '@feature/services/header/header.service';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
@@ -21,7 +23,8 @@ import { Gist } from '@entities/gist.entity';
 	public constructor(
 
 		private headerService: HeaderService,
-		private githubService: GithubService
+		private githubService: GithubService,
+		private modalController: ModalController
 
 	) {
 
@@ -44,9 +47,22 @@ import { Gist } from '@entities/gist.entity';
 		);
 	}
 
-	public onGistSelected(gist: Gist): void {
+	public async onGistSelected(gist: Gist): Promise<void> {
 
-		console.log('Gist seleccionado para ver QR:', gist.id);
+		const modal = await this.modalController.create({
+
+			component: GistQrModalComponent,
+
+			componentProps: {
+
+				gistUrl: gist.html_url,
+				gistTitle: gist.description
+
+			}, breakpoints: [0, 0.6, 1], initialBreakpoint: 0.6,
+
+		});
+
+		await modal.present();
 
 	}
 
