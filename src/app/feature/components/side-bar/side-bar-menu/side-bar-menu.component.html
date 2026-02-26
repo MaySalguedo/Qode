@@ -1,0 +1,79 @@
+<div class="custom-menu-overlay" [class.active]="isOpen" (click)="close()">
+
+	<div class="custom-menu" [class.active]="isOpen" (click)="$event.stopPropagation()">
+
+		<div class="menu-header">
+
+			<ion-toolbar color="primary">
+
+				<ion-title>Menu</ion-title>
+
+				<ion-buttons slot="end">
+
+					<ion-button (click)="close()">
+
+						<ion-icon name="close"></ion-icon>
+
+					</ion-button>
+
+				</ion-buttons>
+
+			</ion-toolbar>
+
+		</div>
+
+		<div class="menu-content">
+
+			@if (isLogged){
+
+				<div class="menu-item" (click)="navigateTo('/home'); close()">
+
+					<ion-icon name="home" slot="start"></ion-icon>
+					<span>Home</span>
+
+				</div>
+				
+				<div class="menu-item" (click)="navigateTo('/profile')">
+
+					<ion-icon name="person" slot="start"></ion-icon>
+					<span>Profile</span>
+
+				</div>
+
+				<div class="menu-item" (click)="navigateTo('/settings')">
+
+					<ion-icon name="settings" slot="start"></ion-icon>
+					<span>Settings</span>
+
+				</div>
+				
+				<div class="menu-item" (click)="navigateTo('/favorites')">
+
+					<ion-icon name="heart" slot="start"></ion-icon>
+					<span>Favorites</span>
+
+				</div>
+
+				<div class="menu-item logout-item" (click)="logout()">
+
+					<ion-icon name="log-out" slot="start" color="danger"></ion-icon>
+					<span color="danger">Logout</span>
+
+				</div>
+
+			}@else{
+
+				<div class="menu-item login-item" (click)="logout()">
+
+					<ion-icon name="log-in" slot="start" color="success"></ion-icon>
+					<span color="success">Login</span>
+
+				</div>
+
+			}
+
+		</div>
+
+	</div>
+
+</div>

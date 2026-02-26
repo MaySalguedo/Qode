@@ -1,0 +1,140 @@
+.toggle-button-container {
+	position: fixed;
+	top: 8px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 1000;
+	background: white;
+	border-radius: 50%;
+	width: 36px;
+	height: 36px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	cursor: pointer;
+	transition: all 0.3s ease;
+
+	&:hover {
+		transform: translateX(-50%) scale(1.05);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+		background-color: #f8f9fa;
+	}
+}
+
+.toggle-button {
+	width: 24px;
+	height: 18px;
+	position: relative;
+}
+
+.toggle {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 18px;
+	height: 2px;
+	background-color: #4299e1;
+	border-radius: 1px;
+	box-shadow: 
+		0 -5px 0 #4299e1,
+		0 5px 0 #4299e1;
+	transition: all 0.3s ease;
+}
+
+ion-header.expanded {
+	.toggle {
+		transform: translate(-50%, -50%) rotate(90deg);
+		box-shadow: 
+			0 -6px 0 #4299e1,
+			0 6px 0 #4299e1;
+		width: 24px;
+	}
+}
+
+ion-header.expanded .header-content {
+	max-height: 500px;
+	padding-top: 40px;
+}
+
+ion-toolbar {
+	--border-width: 0 0 1px 0;
+	--border-color: #e9ecef;
+	--padding-end: 16px;
+
+	.back-button {
+		--padding-start: 8px;
+		--padding-end: 8px;
+		
+		ion-icon {
+			font-size: 1.4em;
+		}
+		
+		&:hover {
+			--color: var(--ion-color-primary-shade);
+		}
+	}
+}
+
+.user-info {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	cursor: pointer;
+	
+	ion-button {
+		margin-right: 8px;
+	}
+}
+
+.user-name {
+	font-size: 0.95rem;
+	font-weight: 500;
+	margin-right: 8px;
+	color: var(--ion-color-dark);
+}
+
+.user-avatar {
+	width: 40px;
+	height: 40px;
+	
+	img {
+		border: 2px solid #e9ecef;
+		border-radius: 50%;
+		padding: 2px;
+	}
+}
+
+ion-title {
+	font-weight: 600;
+	padding-left: 16px;
+}
+
+ion-button {
+	--color: #718096;
+	--padding-start: 8px;
+	--padding-end: 8px;
+
+	&:hover ion-icon {
+		color: #4299e1;
+	}
+}
+
+@keyframes slideDown {
+	from {
+		transform: translateY(-100%);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+// Ajustes para modo oscuro
+@media (prefers-color-scheme: dark) {
+	.toggle-button-container {
+		background: var(--ion-color-dark);
+	}
+}

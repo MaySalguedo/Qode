@@ -1,0 +1,18 @@
+<div class="search-container">
+	<ion-searchbar
+		[placeholder]="config.searchPlaceholder || 'Search...'"
+		[(ngModel)]="currentState.searchText"
+		(ionInput)="onSearchChange($event)"
+		(ionClear)="clearSearch()"
+		animated
+		clear-icon="close-circle"
+	></ion-searchbar>
+
+	<ion-button
+		fill="clear"
+		(click)="openFilterPopover($event)"
+		class="filter-button"
+	>
+		<ion-icon slot="icon-only" name="options-outline"></ion-icon>
+	</ion-button>
+</div>

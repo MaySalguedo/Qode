@@ -1,0 +1,30 @@
+
+<ion-content [fullscreen]="true" class="ion-padding">
+	
+	<div class="home-container">
+
+		@if (gists$ | async; as gists) {
+			
+			@if (gists.length > 0) {
+				<app-gists-grid 
+					[gists]="gists" 
+					[user_id]="currentUserId"
+					(gistSelected)="onGistSelected($event)">
+				</app-gists-grid>
+			} @else {
+				<div class="empty-state">
+					<ion-icon name="code-working-outline"></ion-icon>
+					<h3>No se encontraron Gists</h3>
+					<p>Crea un nuevo Gist en GitHub para verlo aquí.</p>
+				</div>
+			}
+
+		} @else {
+			<div class="loading-state ion-text-center">
+				<ion-spinner name="crescent"></ion-spinner>
+				<p>Sincronizando con GitHub...</p>
+			</div>
+		}
+	</div>
+
+</ion-content>

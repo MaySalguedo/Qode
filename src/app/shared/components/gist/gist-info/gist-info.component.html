@@ -1,0 +1,51 @@
+<ion-card class="gist-card" button (click)="gistSelected.emit(gist)">
+	<div class="card-badges">
+		<span class="id-badge">#{{ gist.id.substring(0, 7) }}</span>
+		<ion-chip [color]="gist.public ? 'success' : 'warning'" outline>
+			<ion-icon [name]="gist.public ? 'eye-outline' : 'lock-closed-outline'"></ion-icon>
+			<ion-label>{{ gist.public ? 'Public' : 'Secret' }}</ion-label>
+		</ion-chip>
+	</div>
+
+	<ion-card-header>
+		<div class="header-main">
+			<div class="icon-wrapper" [style.background-color]="utilService.getLanguageColor(mainLanguage) + '20'">
+				<ion-icon name="code-working-outline" [style.color]="utilService.getLanguageColor(mainLanguage)"></ion-icon>
+			</div>
+			<div class="title-area">
+				<ion-card-title>{{ gist.description || 'Snippet sin descripción' }}</ion-card-title>
+				<ion-card-subtitle>
+					<img [src]="gist.owner.avatar_url" class="mini-avatar" />
+					{{ gist.owner.login }}
+				</ion-card-subtitle>
+			</div>
+		</div>
+	</ion-card-header>
+
+	<ion-card-content>
+		<div class="files-section">
+			<p class="section-label">Archivos ({{ fileList.length }})</p>
+			<div class="file-tags">
+				@for (file of fileList.slice(0, 3); track file.filename) {
+					<div class="file-tag">
+						<ion-icon name="document-outline"></ion-icon>
+						<span>{{ file.filename }}</span>
+					</div>
+				}
+				@if (fileList.length > 3) {
+					<div class="file-tag more"><span>+{{ fileList.length - 3 }}</span></div>
+				}
+			</div>
+		</div>
+
+		<div class="corner-bottom-left date-badge">
+			<ion-icon name="calendar-outline"></ion-icon>
+			<span>{{ createdAt }}</span>
+		</div>
+		
+		<div class="corner-bottom-right date-badge">
+			<ion-icon name="sync-outline"></ion-icon>
+			<span>{{ updatedAt }}</span>
+		</div>
+	</ion-card-content>
+</ion-card>

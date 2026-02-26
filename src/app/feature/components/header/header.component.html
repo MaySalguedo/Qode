@@ -1,0 +1,64 @@
+
+@if (isShown$ | async) {
+
+	<ion-header [class.expanded]="isExpanded">
+
+		<div class="toggle-button-container" (click)="toggleHeader()">
+
+			<div class="toggle-button">
+
+				<div class="toggle"></div>
+
+			</div>
+
+		</div>
+
+		@if(isExpanded && user){
+
+			<ion-toolbar>
+
+				@if (showBackButton){
+
+					<ion-buttons slot="start">
+
+						<ion-button (click)="goBack()" fill="empty" class="back-button">
+
+							<ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+
+						</ion-button>
+
+					</ion-buttons>
+
+				}
+
+				<ion-title>{{title}}</ion-title>
+				
+				<ion-buttons slot="end">
+
+					<div class="user-info" (click)="toggleMenu()">
+
+						<span class="user-name">{{ user.login }}</span>
+
+						<ion-avatar class="user-avatar">
+
+							<img [src]="user.avatar_url">
+
+						</ion-avatar>
+
+					</div>
+
+				</ion-buttons>
+
+			</ion-toolbar>
+
+		}
+
+	</ion-header>
+
+	@if (isMenuOpen){
+
+		<app-side-bar-menu [isLogged]="!!user" [isOpen]="isMenuOpen" (onClose)="closeMenu()" (onLogout)="logout()"></app-side-bar-menu>
+
+	}
+
+}

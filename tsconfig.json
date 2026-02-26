@@ -1,0 +1,52 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+	"compileOnSave": false,
+	"compilerOptions": {
+		"baseUrl": "./",
+		"paths": {
+
+			"@shared/*": ["src/app/shared/*"],
+			"@core/*": ["src/app/core/*"],
+			"@feature/*": ["src/app/feature/*"],
+			"@guards/*": ["src/app/core/guards/*"],
+			"@env/*": ["src/environments/*"],
+			"@models/*": ["src/domain/models/*"],
+			"@entities/*": ["src/domain/entities/*"],
+			"@auth/*": ["src/app/core/services/auth/*"],
+			"@token/*": ["src/app/core/services/storage/token/*"],
+			"@cookie/*": ["src/app/core/services/storage/cookie/*"],
+			"@swal/*": ["src/app/core/services/swal/*"],
+			"@github/*": ["src/app/core/services/http/github/*"],
+			"@util/*": ["src/app/shared/services/util/*"],
+			"@components/*": ["src/app/shared/components/*"]
+
+		},
+		"outDir": "./dist/out-tsc",
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+		"noImplicitOverride": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"sourceMap": true,
+		"declaration": false,
+		"downlevelIteration": true,
+		"experimentalDecorators": true,
+		"moduleResolution": "node",
+		"importHelpers": true,
+		"target": "es2022",
+		"module": "es2020",
+		"lib": [
+			"es2018",
+			"dom"
+		],
+		"skipLibCheck": true,
+		"useDefineForClassFields": false
+	},
+	"angularCompilerOptions": {
+		"enableI18nLegacyMessageIdFormat": false,
+		"strictInjectionParameters": true,
+		"strictInputAccessModifiers": true,
+		"strictTemplates": true
+	}
+}

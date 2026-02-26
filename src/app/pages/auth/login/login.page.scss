@@ -1,0 +1,52 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+
+.header {
+  .title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    letter-spacing: -1px;
+    color: var(--ion-color-step-900); // Dynamic color based on theme
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--ion-color-step-600);
+  }
+}
+
+.brand-icon {
+  ion-icon {
+    font-size: 120px;
+    color: var(--ion-color-primary);
+    opacity: 0.8;
+  }
+}
+
+.footer {
+  width: 100%;
+  max-width: 300px;
+
+  .github-button {
+    --border-radius: 12px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    height: 52px;
+  }
+
+  .disclaimer {
+    font-size: 0.75rem;
+    color: var(--ion-color-step-400);
+  }
+}
+
+ion-spinner {
+  --color: var(--ion-color-primary);
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Qode",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

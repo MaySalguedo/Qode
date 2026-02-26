@@ -1,0 +1,195 @@
+.gist-card {
+  margin: 12px 16px;
+  border-radius: 20px;
+  // Sombra más profunda para dar relieve sobre el fondo de la app
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  
+  // Usamos variables de sistema para el fondo
+  background: var(--ion-card-background, #ffffff);
+  border: 1px solid var(--ion-color-light-shade);
+  
+  // Reducimos el padding inferior para acercar las fechas al borde
+  padding-bottom: 24px; 
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  // --- Badges Superiores ---
+  .card-badges {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px 0;
+
+    .id-badge {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      color: var(--ion-color-medium);
+      background: var(--ion-color-light-tint);
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    ion-chip {
+      height: 22px;
+      margin: 0;
+      font-size: 0.65rem;
+      ion-icon { font-size: 0.75rem; }
+    }
+  }
+
+  // --- Encabezado ---
+  .header-main {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 16px;
+
+    .icon-wrapper {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
+      
+      ion-icon { font-size: 1.4rem; }
+    }
+
+    .title-area {
+      overflow: hidden;
+      flex: 1;
+
+      ion-card-title {
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1.2;
+        color: var(--ion-color-dark);
+      }
+      
+      ion-card-subtitle {
+        display: flex;
+        align-items: center;
+        margin-top: 4px;
+        font-size: 0.8rem;
+        
+        .mini-avatar {
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          margin-right: 6px;
+          border: 1px solid var(--ion-color-light-shade);
+        }
+      }
+    }
+  }
+
+  // --- Sección de Archivos ---
+  .files-section {
+    margin: 4px 16px;
+    padding: 12px;
+    background: var(--ion-color-light-tint); // Fondo destacado
+    border-radius: 14px;
+
+    .section-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--ion-color-medium);
+      margin: 0 0 8px 0;
+    }
+
+    .file-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+
+      .file-tag {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        background: var(--ion-card-background, #fff); // Contraste contra el gris
+        padding: 4px 10px;
+        border-radius: 8px;
+        font-size: 0.7rem;
+        font-weight: 500;
+        border: 1px solid var(--ion-color-light-shade);
+        
+        span {
+          max-width: 120px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        &.more {
+          background: transparent;
+          border: 1px dashed var(--ion-color-primary);
+          color: var(--ion-color-primary);
+        }
+      }
+    }
+  }
+
+  // --- Comentarios ---
+  .comments-section {
+    margin: 8px 16px 16px 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: var(--ion-color-medium);
+    
+    &.has-comments {
+      color: var(--ion-color-primary);
+      font-weight: 600;
+    }
+  }
+
+  // --- Fechas (Pegadas al fondo real) ---
+  .date-badge {
+    position: absolute;
+    bottom: 6px; // Pegado al borde inferior
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 0.6rem;
+    color: var(--ion-color-medium);
+    opacity: 0.7;
+    
+    ion-icon { font-size: 0.75rem; }
+  }
+
+  .corner-bottom-left { left: 14px; }
+  .corner-bottom-right { right: 14px; text-align: right; }
+}
+
+// --- Soporte Modo Oscuro ---
+@media (prefers-color-scheme: dark) {
+  .gist-card {
+    background: var(--ion-color-step-100, #1e1e1e); // Un gris ligeramente más claro que el fondo negro
+    border-color: var(--ion-color-step-200);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+
+    .files-section {
+      background: var(--ion-color-step-150);
+      .file-tag {
+        background: var(--ion-color-step-250);
+        border-color: transparent;
+      }
+    }
+    
+    .id-badge {
+      background: var(--ion-color-step-200);
+    }
+  }
+}

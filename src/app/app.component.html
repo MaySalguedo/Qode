@@ -1,0 +1,11 @@
+<ion-app>
+
+	@if(user) {
+
+		<app-header [user]="user" ></app-header>
+
+	}
+	<app-loading></app-loading>
+	<ion-router-outlet id="main-content"></ion-router-outlet>
+
+</ion-app>

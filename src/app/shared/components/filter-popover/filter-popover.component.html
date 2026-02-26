@@ -1,0 +1,123 @@
+<ion-content class="ion-padding">
+
+	<ion-list lines="full">
+
+		@for (field of config.filterFields; track $index){
+
+			<ng-container>
+
+				<ion-item>
+
+					<ion-label position="stacked">{{ field.label }}</ion-label>
+
+					@switch(field.type) {
+
+						@case('select') {
+
+							<ion-select
+								[(ngModel)]="tempState.filters[field.key]"
+								interface="popover"
+								placeholder="Selecciona"
+							>
+
+								@for (opt of field.options; track $index) {
+
+									<ion-select-option [value]="opt.value">
+										
+										{{ opt.label }}
+
+									</ion-select-option>
+
+								}
+
+							</ion-select>
+
+						}
+						@case('boolean') {
+
+							<ion-toggle
+								[(ngModel)]="tempState.filters[field.key]"
+							></ion-toggle>
+
+						}
+						@case('text') {
+
+							<ion-input
+								[(ngModel)]="tempState.filters[field.key]"
+								type="text"
+							></ion-input>
+
+						}
+						@case('date') {
+
+							<ion-datetime
+								[(ngModel)]="tempState.filters[field.key]"
+								presentation="date"
+							></ion-datetime>
+
+						}
+
+					}
+
+				</ion-item>
+
+			</ng-container>
+
+		}
+
+		@if(tempState && tempState.sort) {
+
+			<ion-item>
+
+				<ion-label>Sort by</ion-label>
+
+				<ion-select
+					[(ngModel)]="tempState.sort.field"
+					interface="popover"
+					placeholder="None"
+				>
+					<ion-select-option [value]="null">None</ion-select-option>
+
+					@for(field of config.sortFields; track $index) {
+
+						<ion-select-option [value]="field.key">
+
+							{{ field.label }}
+
+						</ion-select-option>
+
+					}
+
+				</ion-select>
+
+			</ion-item>
+
+			<ion-item>
+
+				<ion-label>Order</ion-label>
+				<ion-segment [(ngModel)]="tempState.sort.direction">
+
+					<ion-segment-button value="asc">
+						<ion-label>ASC</ion-label>
+					</ion-segment-button>
+
+					<ion-segment-button value="desc">
+						<ion-label>DESC</ion-label>
+					</ion-segment-button>
+
+				</ion-segment>
+
+			</ion-item>
+
+		}
+
+	</ion-list>
+
+	<div class="popover-buttons">
+
+		<ion-button expand="block" color="primary" (click)="applyFilters()">Apply</ion-button>
+		<ion-button expand="block" color="medium" (click)="clearFilters()">Clear</ion-button>
+
+	</div>
+
+</ion-content>

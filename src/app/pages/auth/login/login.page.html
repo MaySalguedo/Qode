@@ -1,0 +1,34 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+
+	<div class="login-container">
+		
+		<header class="header">
+			<h1 class="title">Qode</h1>
+			<p class="subtitle">Your GitHub Gists, physically accessible.</p>
+		</header>
+
+		<div class="brand-icon">
+			<ion-icon name="qr-code-outline"></ion-icon>
+		</div>
+
+		<footer class="footer">
+			@if (isLoading) {
+				<ion-spinner name="crescent"></ion-spinner>
+			} @else {
+				<ion-button 
+					expand="block" 
+					mode="ios" 
+					class="github-button" 
+					(click)="onLogin()">
+					<ion-icon slot="start" name="logo-github"></ion-icon>
+					Sign in with GitHub
+				</ion-button>
+				<p class="disclaimer">
+					Secure authentication powered by Firebase.
+				</p>
+			}
+		</footer>
+
+	</div>
+
+</ion-content>
