@@ -22,8 +22,8 @@ import { TokenService } from '@token/token.service';
 
 		if (access) return true
 
-		this.router.navigate(['/home']);
-		return true;
+		this.router.navigate(['/login']);
+		return false;
 
 	}
 

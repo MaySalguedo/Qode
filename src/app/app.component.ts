@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
+import { App, URLOpenListenerEvent } from '@capacitor/app';
 import { GithubService } from '@github/github.service';
+import { AuthService } from '@auth/auth.service';
+import { TokenService } from '@token/token.service';
 import { GitUser } from '@entities/git-user.entity';
 
 @Component({
@@ -16,11 +19,19 @@ import { GitUser } from '@entities/git-user.entity';
 
 	public constructor(
 
-		private githubService: GithubService
+		private githubService: GithubService,
+		private router: Router,
+		private authService: AuthService,
+		private tokenService: TokenService,
+		private zone: NgZone
 
-	) {}
+	) {
 
-	public ngOnInit(): void {
+		this.initializeApp();
+
+	}
+
+	public async ngOnInit(): Promise<void> {
 
 		this.githubService.profile().subscribe({
 
@@ -31,6 +42,20 @@ import { GitUser } from '@entities/git-user.entity';
 				if (user) this.user = user;
 
 			}, error: (e) => {console.log(e);}
+
+		});
+
+	}
+
+	private initializeApp(): void {
+
+		App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
+
+			this.zone.run(() => {
+
+				this.router.navigateByUrl('/home');
+
+			});
 
 		});
 

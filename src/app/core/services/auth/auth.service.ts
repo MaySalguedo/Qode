@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { 
 	Auth, 
 	signInWithPopup, 
-	GithubAuthProvider, 
+	GithubAuthProvider,
+	signInWithCredential,
 	signOut, 
 	user, 
 	User,
@@ -11,6 +12,7 @@ import {
 } from '@angular/fire/auth';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
+//import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 
 @Injectable({
 	providedIn: 'root'
@@ -24,6 +26,35 @@ export class AuthService {
 		this.user$ = authState(this.auth);
 
 	}
+
+	/*public async login(): Promise<{ accessToken: string } | null> {//Promise<OAuthCredential | null> {
+
+		const result = await FirebaseAuthentication.signInWithGithub();
+
+		const accessToken = result.credential?.accessToken;
+
+		if (accessToken) {
+			// 3. ¡Paso crítico! Sincronizamos la sesión nativa con AngularFire
+			// para que authState y Firebase en la web se enteren del inicio de sesión.
+			const credential = GithubAuthProvider.credential(accessToken);
+			await signInWithCredential(this.auth, credential);
+
+			// 4. Devolvemos el token con la estructura que tu login.page.ts ya espera
+			return { accessToken };
+		}
+
+		return null;
+
+		/*const provider = new GithubAuthProvider();
+
+		provider.addScope('read:user');
+		provider.addScope('gist');
+
+		const result = await signInWithPopup(this.auth, provider);
+
+		return GithubAuthProvider.credentialFromResult(result);
+
+	}*/
 
 	public async login(): Promise<OAuthCredential | null> {
 
@@ -42,6 +73,7 @@ export class AuthService {
 
 		try {
 
+			//await FirebaseAuthentication.signOut();
 			await signOut(this.auth);
 			localStorage.removeItem('gh_access_token');
 

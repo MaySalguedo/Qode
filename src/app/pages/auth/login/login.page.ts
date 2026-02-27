@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { TokenService } from '@token/token.service';
 import { AuthService } from '@auth/auth.service';
 
+import { SwalService } from '@swal/swal.service';
+
 @Component({
 
 	selector: 'app-login',
@@ -19,6 +21,7 @@ import { AuthService } from '@auth/auth.service';
 
 		private authService: AuthService,
 		private tokenService: TokenService,
+		private swalService: SwalService,
 		private router: Router
 
 	) {
@@ -46,9 +49,9 @@ import { AuthService } from '@auth/auth.service';
 
 			}
 
-		} catch (error) {
+		} catch (e: any) {
 
-			console.error('Login failed', error);
+			this.swalService.showException('Login Exception', e.message);
 
 		} finally {
 

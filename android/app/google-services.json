@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "6932729965",
+    "project_id": "qode-gist",
+    "storage_bucket": "qode-gist.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6932729965:android:43096d669389dc8e8b2f64",
+        "android_client_info": {
+          "package_name": "app.may.qode"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtUoLHVRMeMc9JuC_yMPyOxaKxp2GNxKw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
