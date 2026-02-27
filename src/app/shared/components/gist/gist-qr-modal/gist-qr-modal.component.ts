@@ -12,6 +12,7 @@ import { ModalController } from '@ionic/angular';
 
 	@Input() public gistUrl!: string;
 	@Input() public gistTitle!: string;
+	@Input() public readmeContent!: string;
 
 	public constructor(private modalCtrl: ModalController) {}
 

@@ -51,7 +51,7 @@ import { SwalService } from '@swal/swal.service';
 
 			catchError((error: HttpErrorResponse) => {
 
-				this.swalService.showException('Github Exception', error.message);
+				if (error.status !== 401 && localStorage.getItem('access_token')) this.swalService.showException('Github Exception', error.message);
 
 				if (error.status === 401) {
 

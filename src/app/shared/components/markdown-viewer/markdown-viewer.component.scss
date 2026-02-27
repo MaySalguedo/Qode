@@ -1,0 +1,131 @@
+// markdown-viewer.component.scss
+
+.github-markdown-container {
+  // 1. Tipografía y alineación base (Estilo GitHub)
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  color: var(--ion-text-color, #24292e);
+  text-align: left !important;
+  display: block;
+  width: 100%;
+  clear: both;
+  overflow-x: hidden; // Evita que el contenedor padre se estire
+
+  // 2. Forzar alineación a la izquierda para todo el contenido inyectado
+  p, h1, h2, h3, h4, h5, h6, ul, ol, pre, blockquote, table {
+    text-align: left !important;
+  }
+
+  // 3. Tablas Responsivas (Scroll horizontal en mobile)
+  table {
+    display: block; 
+    width: 100%;
+    overflow-x: auto; // Permite el scroll lateral si la tabla es muy ancha
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin-top: 0;
+    margin-bottom: 16px;
+    -webkit-overflow-scrolling: touch; // Suavidad en scroll iOS
+
+    th, td {
+      padding: 6px 13px;
+      border: 1px solid var(--ion-color-light-shade);
+    }
+
+    tr {
+      background-color: var(--ion-card-background, #ffffff);
+      border-top: 1px solid var(--ion-color-light-shade);
+      
+      &:nth-child(2n) {
+        background-color: var(--ion-color-light-tiny, #f6f8fa);
+      }
+    }
+  }
+
+  // 4. Bloques de código con PrismJS y Scroll lateral
+  pre {
+    background-color: #f6f8fa;
+    border-radius: 6px;
+    padding: 16px;
+    overflow-x: auto; // Scroll para líneas de código largas
+    font-size: 85%;
+    line-height: 1.45;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    white-space: pre;
+
+    code {
+      background-color: transparent;
+      padding: 0;
+      border-radius: 0;
+      word-break: normal;
+      white-space: pre;
+    }
+  }
+
+  // 5. Encabezados (Headers)
+  h1, h2 {
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid var(--ion-color-light-shade);
+    margin-top: 24px;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  // 6. Imágenes, Badges y Multimedia
+  img {
+    max-width: 100%;
+    box-sizing: content-box;
+    display: inline-block;
+    height: auto;
+  }
+
+  // 7. Listas y Blockquotes
+  ul, ol {
+    padding-left: 2em;
+    margin-bottom: 16px;
+  }
+
+  blockquote {
+    padding: 0 1em;
+    color: var(--ion-color-medium);
+    border-left: 0.25em solid var(--ion-color-light-shade);
+    margin: 0 0 16px 0;
+  }
+
+  // 8. Elementos de código inline (ej: `variable`)
+  code:not(pre code) {
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(175, 184, 193, 0.2);
+    border-radius: 6px;
+  }
+}
+
+// 9. Soporte para Dark Mode automático basado en el sistema
+@media (prefers-color-scheme: dark) {
+  .github-markdown-container {
+    color: #e6edf3;
+
+    pre { 
+      background-color: #161b22; 
+    }
+    
+    table {
+      tr {
+        background-color: #0d1117;
+        &:nth-child(2n) { background-color: #161b22; }
+      }
+      th, td { border-color: #30363d; }
+    }
+
+    h1, h2 { border-color: #30363d; }
+
+    code:not(pre code) {
+      background-color: rgba(110, 118, 129, 0.4);
+    }
+  }
+}

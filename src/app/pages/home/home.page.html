@@ -3,6 +3,16 @@
 	
 	<div class="home-container">
 
+		<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+
+			<ion-fab-button color="primary">
+
+				<app-scanner-button (scannedContent)="onGistScanned($event)"></app-scanner-button>
+
+			</ion-fab-button>
+
+		</ion-fab>
+
 		@if (gists$ | async; as gists) {
 			
 			@if (gists.length > 0) {
@@ -22,7 +32,7 @@
 		} @else {
 			<div class="loading-state ion-text-center">
 				<ion-spinner name="crescent"></ion-spinner>
-				<p>Sync with GitHub...</p>
+				<p>Signing in with GitHub...</p>
 			</div>
 		}
 	</div>

@@ -20,7 +20,20 @@
 		</ion-text>
 	</div>
 
+	<ion-list-header>
+		<ion-label>Gist Documentation</ion-label>
+	</ion-list-header>
+
+	@if (readmeContent) {
+		<app-markdown-viewer [content]="readmeContent"></app-markdown-viewer>
+	} @else {
+		<div class="empty-readme ion-text-center ion-padding">
+			<ion-icon name="document-text-outline" size="large"></ion-icon>
+			<p>Unable to find README documentation.</p>
+		</div>
+	}
+
 	<ion-button expand="block" shape="round" color="dark" (click)="dismiss()">
-		Cerrar
+		Close
 	</ion-button>
 </ion-content>

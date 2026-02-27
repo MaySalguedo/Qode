@@ -31,8 +31,20 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
-            "scripts": []
+            "styles": [
+				"src/global.scss",
+				"src/theme/variables.scss",
+				"node_modules/prismjs/themes/prism-okaidia.css", 
+				"node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css"
+			],
+            "scripts": [
+				"node_modules/prismjs/prism.js",
+				"node_modules/prismjs/components/prism-typescript.min.js",
+				"node_modules/prismjs/components/prism-bash.min.js",
+				"node_modules/prismjs/components/prism-python.min.js",
+				"node_modules/prismjs/prism.js",
+				"node_modules/emoji-toolkit/lib/js/joypixels.min.js"
+			]
           },
           "configurations": {
             "production": {
@@ -111,8 +123,20 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
-            "scripts": []
+            "styles": [
+				"src/global.scss",
+				"src/theme/variables.scss",
+				"node_modules/prismjs/themes/prism-okaidia.css", 
+				"node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css"
+			],
+            "scripts": [
+				"node_modules/prismjs/prism.js",
+				"node_modules/prismjs/components/prism-typescript.min.js",
+				"node_modules/prismjs/components/prism-bash.min.js",
+				"node_modules/prismjs/components/prism-python.min.js",
+				"node_modules/prismjs/prism.js",
+				"node_modules/emoji-toolkit/lib/js/joypixels.min.js"
+			]
           },
           "configurations": {
             "ci": {
