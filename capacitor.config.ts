@@ -5,7 +5,9 @@ const config: CapacitorConfig = {
 	appName: 'Qode',
 	webDir: 'www',
 	server: {
+
 		cleartext: true
+
 	}, android: {
 
 		googleServicesFile: "./android/app/google-services.json"

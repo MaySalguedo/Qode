@@ -33,6 +33,15 @@ import { GitUser } from '@entities/git-user.entity';
 
 	public async ngOnInit(): Promise<void> {
 
+		const credential = await this.authService.handleRedirectResult();
+
+		if (credential?.accessToken){
+
+			this.tokenService.setAccess(credential.accessToken);
+			this.router.navigate(['/home']);
+
+		}
+
 		this.githubService.profile().subscribe({
 
 			next: (t) => {
