@@ -3,38 +3,45 @@
 	
 	<div class="home-container">
 
-		<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+		@if (isNativePlatform){
 
-			<ion-fab-button color="primary">
+			<ion-fab vertical="bottom" horizontal="end" slot="fixed">
 
 				<app-scanner-button (scannedContent)="onGistScanned($event)"></app-scanner-button>
 
-			</ion-fab-button>
+			</ion-fab>
 
-		</ion-fab>
+		}
 
 		@if (gists$ | async; as gists) {
 			
 			@if (gists.length > 0) {
-				<app-gists-grid 
-					[gists]="gists" 
-					[user_id]="currentUserId"
-					(gistSelected)="onGistSelected($event)">
-				</app-gists-grid>
+
+				<app-gists-grid [gists]="gists" [user_id]="currentUserId" (gistSelected)="onGistSelected($event)"></app-gists-grid>
+
 			} @else {
+
 				<div class="empty-state">
+
 					<ion-icon name="code-working-outline"></ion-icon>
 					<h3>No Gists were found</h3>
 					<p>Create a new Gist to see it here.</p>
+
 				</div>
+
 			}
 
 		} @else {
+
 			<div class="loading-state ion-text-center">
+
 				<ion-spinner name="crescent"></ion-spinner>
 				<p>Signing in with GitHub...</p>
+
 			</div>
+
 		}
+
 	</div>
 
 </ion-content>

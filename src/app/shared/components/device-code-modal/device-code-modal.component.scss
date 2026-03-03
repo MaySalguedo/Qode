@@ -1,0 +1,32 @@
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.code-box {
+  background: var(--ion-color-step-100);
+  border: 2px dashed var(--ion-color-primary);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+  width: 100%;
+  cursor: pointer;
+
+  .verification-code {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    margin: 0;
+    color: var(--ion-color-primary);
+  }
+}
+
+.loading-status {
+  p {
+    font-size: 0.9rem;
+    color: var(--ion-color-step-600);
+  }
+}

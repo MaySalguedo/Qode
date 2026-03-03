@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
+import { SwalService } from '@swal/swal.service';
 
 @Component({
 
@@ -11,21 +12,50 @@ import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
 }) export class ScannerButtonComponent implements OnInit {
 
 	@Output() public scannedContent = new EventEmitter<string>();
+	public isInstalled: boolean = false;
 
-	public constructor() {}
+	public constructor(
 
-	public ngOnInit(): void {}
+		private swalService: SwalService
 
-	async startScan() {
+	) {}
 
-		const granted = await this.requestPermissions();
-		if (!granted) return;
+	public async ngOnInit(): Promise<void> {
 
-		const { barcodes } = await BarcodeScanner.scan();
+		try{
+
+			const granted = await this.requestPermissions();
+			const isInstalled = await BarcodeScanner.isGoogleBarcodeScannerModuleAvailable();
+			await BarcodeScanner.installGoogleBarcodeScannerModule();
+			this.isInstalled = true;
 		
-		if (barcodes.length > 0) {
+		}catch(e: any) {
 
-			this.scannedContent.emit(barcodes[0].displayValue);
+			this.isInstalled = false;
+			this.swalService.showException('Scanner Exception', e.message);
+
+		}
+
+	}
+
+	public async startScan() {
+
+		try{
+
+			//const granted = await this.requestPermissions();
+			//if (!granted) return;
+
+			const { barcodes } = await BarcodeScanner.scan();
+
+			if (barcodes.length > 0) {
+
+				this.scannedContent.emit(barcodes[0].displayValue);
+
+			}
+
+		}catch(e: any) {
+
+			this.swalService.showException('Scanner Exception', e.message);
 
 		}
 

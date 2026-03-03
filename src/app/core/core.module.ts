@@ -39,6 +39,11 @@ import { Capacitor } from '@capacitor/core';
 
 		}, {
 
+			provide: 'GITHUB_APP_CLIENT_ID',
+			useValue: env.github_app_client_id
+
+		}, {
+
 			provide: HTTP_INTERCEPTORS,
 			useClass: AuthInterceptor,
 			multi: true

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { GistQrModalComponent } from '@components/gist/gist-qr-modal/gist-qr-modal.component';
 import { HeaderService } from '@feature/services/header/header.service';
@@ -23,6 +23,7 @@ import { GistFile } from '@models/gist-file.model';
 
 	public constructor(
 
+		@Inject('IS_NATIVE_PLATFORM') public readonly isNativePlatform: boolean,
 		private headerService: HeaderService,
 		private githubService: GithubService,
 		private modalController: ModalController

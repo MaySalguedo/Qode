@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    
+
     repositories {
         google()
         mavenCentral()
@@ -21,6 +21,40 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+    }
+}
+
+// Fix for "Namespace not specified" and "Incorrect package" error in Capacitor plugins
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty('android')) {
+            // Set namespace if not present
+            if (project.android.namespace == null || project.android.namespace.isEmpty()) {
+                if (project.name == 'capacitor-community-http') {
+                    project.android.namespace = "com.getcapacitor.community.http"
+                } else {
+                    def manifestFile = project.file("src/main/AndroidManifest.xml")
+                    if (manifestFile.exists()) {
+                        def contents = manifestFile.getText()
+                        def matcher = contents =~ /package="([^"]+)"/
+                        if (matcher.find()) {
+                            project.android.namespace = matcher.group(1)
+                        }
+                    }
+                }
+            }
+
+            // Remove package attribute from AndroidManifest.xml to satisfy AGP 8.0+
+            def manifestFile = project.file("src/main/AndroidManifest.xml")
+            if (manifestFile.exists()) {
+                def contents = manifestFile.getText()
+                if (contents.contains('package=')) {
+                    println "Removing package attribute from ${manifestFile.path}"
+                    def updatedContents = contents.replaceAll(/\s*package="[^"]*"/, "")
+                    manifestFile.write(updatedContents)
+                }
+            }
+        }
     }
 }
 

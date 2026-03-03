@@ -13,12 +13,15 @@ import { GistInfoComponent } from './components/gist/gist-info/gist-info.compone
 import { GistQrModalComponent } from './components/gist/gist-qr-modal/gist-qr-modal.component';
 import { GistsGridComponent } from './components/gist/gists-grid/gists-grid.component';
 
+import { DeviceCodeModalComponent } from './components/device-code-modal/device-code-modal.component';
 import { FilterPopoverComponent } from './components/filter-popover/filter-popover.component';
 import { MarkdownViewerComponent } from './components/markdown-viewer/markdown-viewer.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { ScannerButtonComponent } from './components/scanner-button/scanner-button.component';
 
 import { UtilService } from './services/util/util.service';
+
+import { Capacitor } from '@capacitor/core';
 
 @NgModule({
 
@@ -27,6 +30,7 @@ import { UtilService } from './services/util/util.service';
 		GistInfoComponent,
 		GistQrModalComponent,
 		GistsGridComponent,
+		DeviceCodeModalComponent,
 		FilterPopoverComponent,
 		SearchBarComponent,
 		MarkdownViewerComponent,
@@ -54,6 +58,7 @@ import { UtilService } from './services/util/util.service';
 		GistInfoComponent,
 		GistQrModalComponent,
 		GistsGridComponent,
+		DeviceCodeModalComponent,
 		FilterPopoverComponent,
 		MarkdownViewerComponent,
 		SearchBarComponent,
@@ -61,7 +66,12 @@ import { UtilService } from './services/util/util.service';
 
 	], providers: [
 
-		UtilService
+		UtilService, {
+
+			provide: 'IS_NATIVE_PLATFORM',
+			useValue: Capacitor.isNativePlatform()
+
+		}
 
 	]
 
