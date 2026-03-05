@@ -20,6 +20,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { ScannerButtonComponent } from './components/scanner-button/scanner-button.component';
 
 import { UtilService } from './services/util/util.service';
+import { SessionEventService } from './services/session-event/session-event.service';
 
 import { Capacitor } from '@capacitor/core';
 
@@ -66,7 +67,7 @@ import { Capacitor } from '@capacitor/core';
 
 	], providers: [
 
-		UtilService, {
+		UtilService, SessionEventService, {
 
 			provide: 'IS_NATIVE_PLATFORM',
 			useValue: Capacitor.isNativePlatform()

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { SessionEventService } from '@shared/services/session-event/session-event.service';
 
 @Component({
 
@@ -14,12 +15,27 @@ import { ModalController } from '@ionic/angular';
 	@Input() public gistTitle!: string;
 	@Input() public readmeContent!: string;
 
-	public constructor(private modalCtrl: ModalController) {}
+	public constructor(
+
+		@Inject('IS_NATIVE_PLATFORM') public readonly isNativePlatform: boolean,
+		private modalCtrl: ModalController,
+		private sessionEventService: SessionEventService
+
+	) {}
 
 	public ngOnInit(): void {}
 
-	public dismiss() {
+	public handleScan(sessionId: string): void {
+
+		console.log('Session ID detected:', sessionId);
+		this.sessionEventService.emitSessionId(sessionId);
+
+	}
+
+	public dismiss(): void {
+
 		this.modalCtrl.dismiss();
+
 	}
 
 }

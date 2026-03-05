@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { GistQrModalComponent } from '@components/gist/gist-qr-modal/gist-qr-modal.component';
 import { HeaderService } from '@feature/services/header/header.service';
@@ -6,8 +6,11 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { GithubService } from '@github/github.service';
 import { AuthService } from '@auth/auth.service';
+import { SwalService } from '@swal/swal.service';
 import { Gist } from '@entities/gist.entity';
 import { GistFile } from '@models/gist-file.model';
+import { SessionEventService } from '@shared/services/session-event/session-event.service';
+import { Subscription } from 'rxjs';
 
 @Component({
 
@@ -16,17 +19,21 @@ import { GistFile } from '@models/gist-file.model';
 	styleUrls: ['home.page.scss'],
 	standalone: false,
 
-}) export class HomePage {
+}) export class HomePage implements OnDestroy, OnInit {
 
 	public gists$: Observable<Gist[]> = of([]);
 	public currentUserId: number = 0;
+
+	private scannerSub!: Subscription;
 
 	public constructor(
 
 		@Inject('IS_NATIVE_PLATFORM') public readonly isNativePlatform: boolean,
 		private headerService: HeaderService,
 		private githubService: GithubService,
-		private modalController: ModalController
+		private modalController: ModalController,
+		private swalService: SwalService,
+		private sessionEventService: SessionEventService
 
 	) {
 
@@ -35,6 +42,16 @@ import { GistFile } from '@models/gist-file.model';
 	}
 
 	public ngOnInit(): void {
+
+		this.scannerSub = this.sessionEventService.sessionScanned$.subscribe({
+
+			next: (id) => {
+
+				this.onSessionScanned(id);
+
+			}, error: (e: any) => this.swalService.showException('QR Exception', e.message)
+
+		});
 
 		this.gists$ = this.githubService.profile().pipe(
 
@@ -47,6 +64,10 @@ import { GistFile } from '@models/gist-file.model';
 				return of([]);
 			})
 		);
+	}
+
+	public ngOnDestroy(): void {
+		if (this.scannerSub) this.scannerSub.unsubscribe();
 	}
 
 	public async onGistSelected(gist: Gist): Promise<void> {
@@ -89,6 +110,12 @@ import { GistFile } from '@models/gist-file.model';
 			await this.onGistSelected(gist);
 
 		}
+
+	}
+
+	public async onSessionScanned(id: string): Promise<void> {
+
+		this.swalService.showInformation('Session ID', id);
 
 	}
 

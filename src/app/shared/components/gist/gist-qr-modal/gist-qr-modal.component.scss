@@ -1,6 +1,19 @@
 .qr-modal-content {
   --background: var(--ion-card-background, #fff);
-  
+  position: relative;
+
+  .scanner-container {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 100; // Asegura que esté por encima de otros elementos
+    
+    // Opcional: Estilo para que parezca un botón flotante pequeño
+    background: var(--ion-color-light);
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
   .header-section {
     margin: 10px 0 25px;
     h3 { font-weight: 800; font-size: 1.4rem; margin-bottom: 5px; }

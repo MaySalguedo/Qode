@@ -26,9 +26,13 @@ import { SwalService } from '@swal/swal.service';
 
 			const granted = await this.requestPermissions();
 			const isInstalled = await BarcodeScanner.isGoogleBarcodeScannerModuleAvailable();
-			await BarcodeScanner.installGoogleBarcodeScannerModule();
-			this.isInstalled = true;
-		
+			if (!isInstalled){
+				await BarcodeScanner.installGoogleBarcodeScannerModule();
+				this.isInstalled = true;
+			}else{
+				this.isInstalled = true;
+			}
+
 		}catch(e: any) {
 
 			this.isInstalled = false;
