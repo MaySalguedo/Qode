@@ -13,6 +13,7 @@
 			"@models/*": ["src/domain/models/*"],
 			"@entities/*": ["src/domain/entities/*"],
 			"@auth/*": ["src/app/core/services/auth/*"],
+			"@firebase/*": ["src/app/core/services/firebase/*"],
 			"@token/*": ["src/app/core/services/storage/token/*"],
 			"@cookie/*": ["src/app/core/services/storage/cookie/*"],
 			"@swal/*": ["src/app/core/services/swal/*"],

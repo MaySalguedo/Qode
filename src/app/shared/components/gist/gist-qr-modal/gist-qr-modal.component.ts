@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { SessionEventService } from '@shared/services/session-event/session-event.service';
+import { SessionEntity } from '@models/session-entity.model';
 
 @Component({
 
@@ -11,6 +12,7 @@ import { SessionEventService } from '@shared/services/session-event/session-even
 
 }) export class GistQrModalComponent implements OnInit {
 
+	@Input() public gistId!: string;
 	@Input() public gistUrl!: string;
 	@Input() public gistTitle!: string;
 	@Input() public readmeContent!: string;
@@ -27,8 +29,14 @@ import { SessionEventService } from '@shared/services/session-event/session-even
 
 	public handleScan(sessionId: string): void {
 
-		console.log('Session ID detected:', sessionId);
-		this.sessionEventService.emitSessionId(sessionId);
+		const source: SessionEntity = {
+
+			id: sessionId,
+			gistIds: [ this.gistId ]
+
+		};
+
+		this.sessionEventService.emitSessionSource(source);
 
 	}
 

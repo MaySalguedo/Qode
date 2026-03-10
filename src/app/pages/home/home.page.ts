@@ -10,6 +10,9 @@ import { SwalService } from '@swal/swal.service';
 import { Gist } from '@entities/gist.entity';
 import { GistFile } from '@models/gist-file.model';
 import { SessionEventService } from '@shared/services/session-event/session-event.service';
+import { SessionService } from '@firebase/session/session.service';
+import { SessionEntity } from '@models/session-entity.model';
+import { Session } from '@entities/session.entity';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -33,7 +36,8 @@ import { Subscription } from 'rxjs';
 		private githubService: GithubService,
 		private modalController: ModalController,
 		private swalService: SwalService,
-		private sessionEventService: SessionEventService
+		private sessionEventService: SessionEventService,
+		private sessionService: SessionService
 
 	) {
 
@@ -45,9 +49,9 @@ import { Subscription } from 'rxjs';
 
 		this.scannerSub = this.sessionEventService.sessionScanned$.subscribe({
 
-			next: (id) => {
+			next: (source) => {
 
-				this.onSessionScanned(id);
+				this.onSessionScanned(source);
 
 			}, error: (e: any) => this.swalService.showException('QR Exception', e.message)
 
@@ -87,6 +91,7 @@ import { Subscription } from 'rxjs';
 
 			componentProps: {
 
+				gistId: gist.id,
 				gistUrl: gist.html_url,
 				gistTitle: gist.description,
 				readmeContent: readme
@@ -113,9 +118,24 @@ import { Subscription } from 'rxjs';
 
 	}
 
-	public async onSessionScanned(id: string): Promise<void> {
+	public async onSessionScanned(source: SessionEntity): Promise<void> {
 
-		this.swalService.showInformation('Session ID', id);
+		try {
+
+			const session: Session | undefined = await this.sessionService.findOne(source.id);
+
+			if (!session) throw new Error(`Session ID: ${source.id} does not exist`);
+
+			session.gistIds = source.gistIds;
+			session.status = 'GIST_RECEIVED';
+
+			await this.sessionService.update(source.id, session);
+
+		}catch(e: any) {
+
+			this.swalService.showException('QR Exception', e.message);
+
+		}
 
 	}
 

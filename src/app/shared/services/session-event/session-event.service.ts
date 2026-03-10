@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { SessionEntity } from '@models/session-entity.model';
 
 @Injectable({
 
@@ -7,12 +8,12 @@ import { Subject } from 'rxjs';
 
 }) export class SessionEventService {
 
-	private sessionSource = new Subject<string>();
+	private sessionSource = new Subject<SessionEntity>();
 	public sessionScanned$ = this.sessionSource.asObservable();
 
-	public emitSessionId(id: string) {
+	public emitSessionSource(source: SessionEntity) {
 
-		this.sessionSource.next(id);
+		this.sessionSource.next(source);
 
 	}
 

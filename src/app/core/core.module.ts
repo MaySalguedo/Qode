@@ -3,15 +3,18 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { provideHttpClient, withInterceptorsFromDi, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { FireApp, authFactory } from './config/env.config';
-
 import { provideFirebaseApp } from '@angular/fire/app';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideAuth } from '@angular/fire/auth';
+
 import { environment as env } from '@env/environment';
 
 import { TokenService } from './services/storage/token/token.service';
 import { SwalService } from './services/swal/swal.service';
 
 import { AuthInterceptor } from './interceptors/auth/auth.interceptor';
+import { SessionService } from './services/firebase/session/session.service';
+
 import { GithubService } from './services/http/github/github.service';
 
 import { Capacitor } from '@capacitor/core';
@@ -31,7 +34,8 @@ import { Capacitor } from '@capacitor/core';
 		provideHttpClient(withInterceptorsFromDi()),
 		provideFirebaseApp(() => FireApp),
 		provideAuth(() => authFactory(FireApp, Capacitor.isNativePlatform())),
-		TokenService, SwalService, GithubService,
+		provideFirestore(() => getFirestore()),
+		TokenService, SwalService, GithubService, SessionService,
 		{
 
 			provide: 'GITHUB_API_URL',
