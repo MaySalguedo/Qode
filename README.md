@@ -59,6 +59,25 @@ src/
 ├── environments/                    # Environment configurations
 ```
 
+## 📱 App Screenshots
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><b>Home Screen</b></td>
+      <td align="center"><b>QR Scanner</b></td>
+    </tr>
+    <tr>
+      <td>
+        <img src="src/assets/screenshots/qode_home.jpeg" alt="Qode Home Screen" width="300"/>
+      </td>
+      <td>
+        <img src="src/assets/screenshots/qode_qr.jpeg" alt="Qode QR Scanner" width="300"/>
+      </td>
+    </tr>
+  </table>
+</div>
+
 ## 🛠️ Technology Stack
 
 ### Frontend & Mobile Framework
@@ -94,21 +113,23 @@ src/
 <li><strong>Clone and Install</strong>
 
 ```Bash
-git clone [https://github.com/MaySalguedo/Qode](https://github.com/MaySalguedo/Qode)
+git clone https://github.com/MaySalguedo/Qode.git
 cd qode
 npm install
 ```
 
 </li>
 
-<li><strong>Configure GitHub API</strong>
+<li><strong>Environment Set Up</strong>
 
-Configure your environment variables in src/environments/environment.ts:
+For security reasons, environment configuration files are not tracked by Git. You must create them manually before running the app.
+Create the <code>src/environments/</code> directory if it doesn't exist, and create a file named <code>environment.ts</code> inside it:
 
 ```TypeScript
 export const environment = {
   production: false,
   github_api_url: 'https://api.github.com',
+  github_app_client_id: 'YOUR_APP_CLIENT_ID',
   firebaseConfig: {
     apiKey: 'YOUR_API_KEY',
     authDomain: 'YOUR_AUTH_DOMAIN',
