@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-button (click)="cancel()">
+				<ion-icon name="close-outline" slot="icon-only"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+		
+		<ion-title>Best Practices</ion-title>
+		
+		<ion-buttons slot="end">
+			<ion-button (click)="hasSelection ? clearAll() : selectAll()" class="text-button">
+				{{ hasSelection ? 'Clear' : 'All' }}
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+	@if (contextName) {
+
+		<div class="context-container">
+			<span class="context-tag">{{ contextName }}</span>
+			<p class="instruction-text">Select the standards to implement.</p>
+		</div>
+
+	}
+
+	@for (section of groupedSections; track section.category) {
+		<app-best-practices-items 
+			[section]="section"
+			[selectedIds]="selectedIds"
+			(toggleOption)="toggleOption($event)">
+		</app-best-practices-items>
+	}
+</ion-content>
+
+<ion-footer class="ion-no-border">
+	<ion-toolbar>
+		<div class="footer-content ion-padding">
+			<p class="selection-summary" [class.muted]="!hasSelection">
+				<ion-icon [name]="hasSelection ? 'checkmark-circle' : 'alert-circle-outline'"></ion-icon>
+				{{ selectedCount }} items selected
+			</p>
+			
+			<ion-button expand="block" [disabled]="!hasSelection" (click)="confirm()">
+				<ion-icon name="rocket-outline" slot="start"></ion-icon>
+				Integrate Practices
+			</ion-button>
+		</div>
+	</ion-toolbar>
+</ion-footer>

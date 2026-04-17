@@ -1,10 +1,14 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { App, URLOpenListenerEvent } from '@capacitor/app';
 import { GithubService } from '@github/github.service';
 import { AuthService } from '@auth/auth.service';
 import { TokenService } from '@token/token.service';
 import { GitUser } from '@entities/git-user.entity';
+import { StatusBar } from '@capacitor/status-bar';
+import { NavigationBar } from '@hugotomazi/capacitor-navigation-bar';
+import { BestPracticeService } from '@core/services/firebase/practice/best-practice.service';
+import { BestPractice, BEST_PRACTICES_UPLOAD } from '@entities/best-practice.entity';
 
 @Component({
 
@@ -23,7 +27,9 @@ import { GitUser } from '@entities/git-user.entity';
 		private router: Router,
 		private authService: AuthService,
 		private tokenService: TokenService,
-		private zone: NgZone
+		private bestPracticeService: BestPracticeService,
+		private zone: NgZone,
+		@Inject('IS_NATIVE_PLATFORM') private isNativePlatform: boolean,
 
 	) {
 
@@ -32,6 +38,15 @@ import { GitUser } from '@entities/git-user.entity';
 	}
 
 	public async ngOnInit(): Promise<void> {
+
+		//await this.uploadPractices();
+
+		if (this.isNativePlatform) {
+
+			await StatusBar.hide();
+			await NavigationBar.hide();
+
+		}
 
 		const credential = await this.authService.handleRedirectResult();
 
@@ -51,6 +66,18 @@ import { GitUser } from '@entities/git-user.entity';
 				if (user) this.user = user;
 
 			}, error: (e) => {console.log(e);}
+
+		});
+
+	}
+
+	private async uploadPractices(): Promise<void> {
+
+		BEST_PRACTICES_UPLOAD.forEach(async (practicde) => {
+
+			const id = await this.bestPracticeService.insert(practicde);
+
+			console.log(id);
 
 		});
 

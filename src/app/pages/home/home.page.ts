@@ -14,6 +14,8 @@ import { SessionService } from '@firebase/session/session.service';
 import { SessionEntity } from '@models/session-entity.model';
 import { Session } from '@entities/session.entity';
 import { Subscription } from 'rxjs';
+import { BestPracticeService } from '@core/services/firebase/practice/best-practice.service';
+import { BestPractice } from '@entities/best-practice.entity';
 
 @Component({
 
@@ -25,6 +27,7 @@ import { Subscription } from 'rxjs';
 }) export class HomePage implements OnDestroy, OnInit {
 
 	public gists$: Observable<Gist[]> = of([]);
+	public practices: Array<BestPractice> = [];
 	public currentUserId: number = 0;
 
 	private scannerSub!: Subscription;
@@ -37,7 +40,8 @@ import { Subscription } from 'rxjs';
 		private modalController: ModalController,
 		private swalService: SwalService,
 		private sessionEventService: SessionEventService,
-		private sessionService: SessionService
+		private sessionService: SessionService,
+		private bestPracticeService: BestPracticeService
 
 	) {
 
@@ -45,7 +49,9 @@ import { Subscription } from 'rxjs';
 
 	}
 
-	public ngOnInit(): void {
+	public async ngOnInit(): Promise<void> {
+
+		await this.loadPractices();
 
 		this.scannerSub = this.sessionEventService.sessionScanned$.subscribe({
 
@@ -68,6 +74,10 @@ import { Subscription } from 'rxjs';
 				return of([]);
 			})
 		);
+	}
+
+	private async loadPractices(): Promise<void> {
+		this.practices = await this.bestPracticeService.findAll();
 	}
 
 	public ngOnDestroy(): void {
@@ -94,7 +104,8 @@ import { Subscription } from 'rxjs';
 				gistId: gist.id,
 				gistUrl: gist.html_url,
 				gistTitle: gist.description,
-				readmeContent: readme
+				readmeContent: readme,
+				practices: this.practices
 
 			}, breakpoints: [0, 0.6, 1], initialBreakpoint: 0.6,
 
@@ -127,6 +138,7 @@ import { Subscription } from 'rxjs';
 			if (!session) throw new Error(`Session ID: ${source.id} does not exist`);
 
 			session.gistIds = source.gistIds;
+			session.practicesIds = source.practicesIds;
 			session.status = 'GIST_RECEIVED';
 
 			await this.sessionService.update(source.id, session);

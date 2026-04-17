@@ -14,6 +14,7 @@ import { SwalService } from './services/swal/swal.service';
 
 import { AuthInterceptor } from './interceptors/auth/auth.interceptor';
 import { SessionService } from './services/firebase/session/session.service';
+import { BestPracticeService } from './services/firebase/practice/best-practice.service';
 
 import { GithubService } from './services/http/github/github.service';
 
@@ -35,7 +36,7 @@ import { Capacitor } from '@capacitor/core';
 		provideFirebaseApp(() => FireApp),
 		provideAuth(() => authFactory(FireApp, Capacitor.isNativePlatform())),
 		provideFirestore(() => getFirestore()),
-		TokenService, SwalService, GithubService, SessionService,
+		TokenService, SwalService, GithubService, SessionService, BestPracticeService,
 		{
 
 			provide: 'GITHUB_API_URL',

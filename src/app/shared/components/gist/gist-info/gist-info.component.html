@@ -1,6 +1,6 @@
 <ion-card class="gist-card" button (click)="gistSelected.emit(gist)">
 	<div class="card-badges">
-		<span class="id-badge">#{{ gist.id.substring(0, 7) }}</span>
+		<span class="id-badge">{{ gist.id }}</span>
 		<ion-chip [color]="gist.public ? 'success' : 'warning'" outline>
 			<ion-icon [name]="gist.public ? 'eye-outline' : 'lock-closed-outline'"></ion-icon>
 			<ion-label>{{ gist.public ? 'Public' : 'Secret' }}</ion-label>
@@ -24,9 +24,9 @@
 
 	<ion-card-content>
 		<div class="files-section">
-			<p class="section-label">Archivos ({{ fileList.length }})</p>
+			<p class="section-label">Files ({{ fileList.length }})</p>
 			<div class="file-tags">
-				@for (file of fileList.slice(0, 3); track file.filename) {
+				@for (file of fileList.slice(0, 2); track file.filename) {
 					<div class="file-tag">
 						<ion-icon name="document-outline"></ion-icon>
 						<span>{{ file.filename }}</span>

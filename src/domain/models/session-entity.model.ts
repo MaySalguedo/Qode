@@ -2,6 +2,7 @@
 export interface SessionEntity {
 
 	id: string,
-	gistIds: string[]
+	gistIds: string[],
+	practicesIds: string[]
 
 }

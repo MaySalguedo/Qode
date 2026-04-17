@@ -9,6 +9,9 @@ import { RouterModule } from '@angular/router';
 import { QRCodeComponent } from 'angularx-qrcode';
 import { MarkdownModule } from 'ngx-markdown';
 
+import { BestPracticesModalComponent } from './components/best-practices/best-practices-modal/best-practices-modal.component';
+import { BestPracticesItemsComponent } from './components/best-practices/best-practices-items/best-practices-items.component';
+
 import { GistInfoComponent } from './components/gist/gist-info/gist-info.component';
 import { GistQrModalComponent } from './components/gist/gist-qr-modal/gist-qr-modal.component';
 import { GistsGridComponent } from './components/gist/gists-grid/gists-grid.component';
@@ -35,7 +38,9 @@ import { Capacitor } from '@capacitor/core';
 		FilterPopoverComponent,
 		SearchBarComponent,
 		MarkdownViewerComponent,
-		ScannerButtonComponent
+		ScannerButtonComponent,
+		BestPracticesModalComponent,
+		BestPracticesItemsComponent
 
 	], imports: [
 
@@ -63,7 +68,9 @@ import { Capacitor } from '@capacitor/core';
 		FilterPopoverComponent,
 		MarkdownViewerComponent,
 		SearchBarComponent,
-		ScannerButtonComponent
+		ScannerButtonComponent,
+		BestPracticesModalComponent,
+		BestPracticesItemsComponent
 
 	], providers: [
 

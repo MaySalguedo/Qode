@@ -1,0 +1,1 @@
+export type BestPracticeCategory = 'design_pattern' | 'philosofy' | 'architecture' | 'ci_cd' | 'property'

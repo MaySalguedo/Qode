@@ -8,9 +8,18 @@ const config: CapacitorConfig = {
 
 		cleartext: true
 
+	}, plugins: {
+
+		StatusBar: {
+
+			overlaysWebView: true
+
+		}
+
 	}, android: {
 
-		googleServicesFile: "./android/app/google-services.json"
+		googleServicesFile: "./android/app/google-services.json",
+		adjustMarginsForEdgeToEdge: 'auto'
 
 	}
 };
