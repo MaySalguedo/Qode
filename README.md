@@ -59,7 +59,7 @@ src/
 ├── environments/                    # Environment configurations
 ```
 
-## 📱 App Screenshots
+## 📱 Mobile App
 
 <div align="center">
   <table>
@@ -77,6 +77,13 @@ src/
     </tr>
   </table>
 </div>
+
+To test the latest version of the application on an Android device, you can access the generated APK directly from your local build directory.
+
+### Debug APK Location
+<a href="./android/app/build/outputs/apk/debug/" target="_blank">Open APK Debug Folder</a>
+
+**Path:** `android\app\build\outputs\apk\debug`
 
 ## 🛠️ Technology Stack
 

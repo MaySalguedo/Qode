@@ -1,0 +1,14 @@
+<div class="toast-wrapper" [class.active]="(state$ | async)?.show" [class.done]="(state$ | async)?.type === 'DONE'">
+
+	<div class="glass-container">
+
+		<div class="status-indicator"></div>
+		<span class="message">{{ (state$ | async)?.message }}</span>
+
+		<button class="close-btn" (click)="close()">
+			<ion-icon name="close-outline"></ion-icon>
+		</button>
+
+	</div>
+
+</div>

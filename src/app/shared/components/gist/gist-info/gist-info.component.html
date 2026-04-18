@@ -26,7 +26,7 @@
 		<div class="files-section">
 			<p class="section-label">Files ({{ fileList.length }})</p>
 			<div class="file-tags">
-				@for (file of fileList.slice(0, 2); track file.filename) {
+				@for (file of fileList.slice(0, 3); track file.filename) {
 					<div class="file-tag">
 						<ion-icon name="document-outline"></ion-icon>
 						<span>{{ file.filename }}</span>

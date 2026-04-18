@@ -8,7 +8,6 @@ import { GitUser } from '@entities/git-user.entity';
 import { StatusBar } from '@capacitor/status-bar';
 import { NavigationBar } from '@hugotomazi/capacitor-navigation-bar';
 import { BestPracticeService } from '@core/services/firebase/practice/best-practice.service';
-import { BestPractice, BEST_PRACTICES_UPLOAD } from '@entities/best-practice.entity';
 
 @Component({
 
@@ -39,8 +38,6 @@ import { BestPractice, BEST_PRACTICES_UPLOAD } from '@entities/best-practice.ent
 
 	public async ngOnInit(): Promise<void> {
 
-		//await this.uploadPractices();
-
 		if (this.isNativePlatform) {
 
 			await StatusBar.hide();
@@ -66,18 +63,6 @@ import { BestPractice, BEST_PRACTICES_UPLOAD } from '@entities/best-practice.ent
 				if (user) this.user = user;
 
 			}, error: (e) => {console.log(e);}
-
-		});
-
-	}
-
-	private async uploadPractices(): Promise<void> {
-
-		BEST_PRACTICES_UPLOAD.forEach(async (practicde) => {
-
-			const id = await this.bestPracticeService.insert(practicde);
-
-			console.log(id);
 
 		});
 

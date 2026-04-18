@@ -1,31 +1,30 @@
 .gist-card {
   margin: 12px 16px;
   border-radius: 20px;
-  // Sombra más profunda para dar relieve sobre el fondo de la app
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
   position: relative;
   display: flex;
   flex-direction: column;
   
-  // Usamos variables de sistema para el fondo
+  // --- AJUSTE DE TAMAÑO ÚNICO ---
+  height: 340px; // Altura fija para que todas sean iguales
   background: var(--ion-card-background, #ffffff);
   border: 1px solid var(--ion-color-light-shade);
-  
-  // Reducimos el padding inferior para acercar las fechas al borde
   padding-bottom: 24px; 
+  overflow: hidden; // Evita que el contenido se salga de la tarjeta
 
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
   }
 
-  // --- Badges Superiores ---
   .card-badges {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 12px 14px 0;
+    flex-shrink: 0; // Evita que los badges se aplasten
 
     .id-badge {
       font-family: 'Courier New', monospace;
@@ -45,12 +44,12 @@
     }
   }
 
-  // --- Encabezado ---
   .header-main {
     display: flex;
     gap: 12px;
     align-items: center;
     padding: 12px 16px;
+    flex-shrink: 0; // Mantiene el tamaño del header
 
     .icon-wrapper {
       width: 42px;
@@ -74,6 +73,13 @@
         font-weight: 700;
         line-height: 1.2;
         color: var(--ion-color-dark);
+        
+        // --- CONTROL DE TÍTULO (Máximo 2 líneas) ---
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       
       ion-card-subtitle {
@@ -93,12 +99,15 @@
     }
   }
 
-  // --- Sección de Archivos ---
   .files-section {
     margin: 4px 16px;
     padding: 12px;
-    background: var(--ion-color-light-tint); // Fondo destacado
+    background: var(--ion-color-light-tint);
     border-radius: 14px;
+    
+    // --- ESPACIO CONSTANTE PARA ARCHIVOS ---
+    height: 105px; // Reserva el mismo espacio siempre
+    overflow: hidden;
 
     .section-label {
       font-size: 0.65rem;
@@ -117,7 +126,7 @@
         display: flex;
         align-items: center;
         gap: 4px;
-        background: var(--ion-card-background, #fff); // Contraste contra el gris
+        background: var(--ion-card-background, #fff);
         padding: 4px 10px;
         border-radius: 8px;
         font-size: 0.7rem;
@@ -125,7 +134,7 @@
         border: 1px solid var(--ion-color-light-shade);
         
         span {
-          max-width: 120px;
+          max-width: 110px;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
@@ -140,25 +149,9 @@
     }
   }
 
-  // --- Comentarios ---
-  .comments-section {
-    margin: 8px 16px 16px 16px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.8rem;
-    color: var(--ion-color-medium);
-    
-    &.has-comments {
-      color: var(--ion-color-primary);
-      font-weight: 600;
-    }
-  }
-
-  // --- Fechas (Pegadas al fondo real) ---
   .date-badge {
     position: absolute;
-    bottom: 6px; // Pegado al borde inferior
+    bottom: 8px; // Bajado ligeramente para que no flote tanto
     display: flex;
     align-items: center;
     gap: 3px;
@@ -173,23 +166,16 @@
   .corner-bottom-right { right: 14px; text-align: right; }
 }
 
-// --- Soporte Modo Oscuro ---
 @media (prefers-color-scheme: dark) {
   .gist-card {
-    background: var(--ion-color-step-100, #1e1e1e); // Un gris ligeramente más claro que el fondo negro
+    background: var(--ion-color-step-100, #1e1e1e);
     border-color: var(--ion-color-step-200);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-
     .files-section {
       background: var(--ion-color-step-150);
       .file-tag {
         background: var(--ion-color-step-250);
         border-color: transparent;
       }
-    }
-    
-    .id-badge {
-      background: var(--ion-color-step-200);
     }
   }
 }

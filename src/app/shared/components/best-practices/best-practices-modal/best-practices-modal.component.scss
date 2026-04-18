@@ -1,24 +1,21 @@
 
-.context-container {
-	margin-bottom: 1.5rem;
-	padding-left: 8px;
-	align: center;
+.context-header {
+	text-align: center;
+	margin: 2rem 0 2.5rem 0; // Más espacio para que respire el diseño
+	padding: 0 1rem;
 
-	.context-tag {
-		background: rgba(var(--ion-color-primary-rgb), 0.1);
-		color: var(--ion-color-primary);
-		padding: 4px 10px;
-		border-radius: 6px;
-		font-size: 0.75rem;
+	.context-title {
+		font-size: 1.75rem; // Tamaño grande
 		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
+		color: var(--ion-text-color);
+		margin-bottom: 0.5rem;
+		letter-spacing: -0.5px;
 	}
 
 	.instruction-text {
-		margin-top: 8px;
-		font-size: 0.95rem;
+		font-size: 1rem; // Tamaño normal
 		color: var(--ion-color-step-600);
+		margin: 0;
 		font-weight: 400;
 	}
 }

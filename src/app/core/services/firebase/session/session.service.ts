@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Session } from '@entities/session.entity';
 
-import { Firestore, collection, collectionData, addDoc, deleteDoc, updateDoc, doc, getDocs, getDoc, query, where, orderBy, limit } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, addDoc, deleteDoc, updateDoc, doc, getDocs, getDoc, query, where, orderBy, limit, onSnapshot } from '@angular/fire/firestore';
 
 @Injectable({
 
@@ -31,6 +31,35 @@ import { Firestore, collection, collectionData, addDoc, deleteDoc, updateDoc, do
 			this.firestore, `${this.collectionName}/${key}`
 
 		), entity);
+
+	}
+
+	public async delete(key: Session['id']): Promise<void> {
+
+		await deleteDoc(doc(
+
+			this.firestore,
+			`${this.collectionName}/${key}`
+
+		));
+
+	}
+
+	public subscribeToSession(key: Session['id'], onUpdate: (data: Session) => void): void {
+		
+		onSnapshot(doc(
+
+			this.firestore, `${this.collectionName}`, key
+
+		), (snapshot) => {
+
+			if (snapshot.exists()) {
+
+				onUpdate(snapshot.data() as Session);
+
+			}
+
+		});
 
 	}
 

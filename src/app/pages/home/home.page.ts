@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { GistQrModalComponent } from '@components/gist/gist-qr-modal/gist-qr-modal.component';
 import { HeaderService } from '@feature/services/header/header.service';
+import { ToastService } from '@feature/services/toast/toast.service';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { GithubService } from '@github/github.service';
@@ -36,6 +37,7 @@ import { BestPractice } from '@entities/best-practice.entity';
 
 		@Inject('IS_NATIVE_PLATFORM') public readonly isNativePlatform: boolean,
 		private headerService: HeaderService,
+		private toastService: ToastService,
 		private githubService: GithubService,
 		private modalController: ModalController,
 		private swalService: SwalService,
@@ -50,8 +52,6 @@ import { BestPractice } from '@entities/best-practice.entity';
 	}
 
 	public async ngOnInit(): Promise<void> {
-
-		await this.loadPractices();
 
 		this.scannerSub = this.sessionEventService.sessionScanned$.subscribe({
 
@@ -74,6 +74,9 @@ import { BestPractice } from '@entities/best-practice.entity';
 				return of([]);
 			})
 		);
+
+		await this.loadPractices();
+
 	}
 
 	private async loadPractices(): Promise<void> {
@@ -142,6 +145,23 @@ import { BestPractice } from '@entities/best-practice.entity';
 			session.status = 'GIST_RECEIVED';
 
 			await this.sessionService.update(source.id, session);
+
+			this.sessionService.subscribeToSession(source.id, async (QodeSession) => {
+
+				if (QodeSession.status === 'ANALYZING') {
+
+					this.toastService.show('Qode AI: Deep-scanning architecture...', 'ANALYZING');
+
+				}
+
+				if (QodeSession.status === 'DONE') {
+
+					this.toastService.show('Implementations compleated.', 'DONE');
+					await this.sessionService.delete(source.id);
+
+				}
+
+			});
 
 		}catch(e: any) {
 

@@ -6,9 +6,11 @@ import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from './components/header/header.component';
 import { SideBarMenuComponent } from './components/side-bar/side-bar-menu/side-bar-menu.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { ToastConfirmationComponent } from './components/toast/toast-confirmation/toast-confirmation.component';
 
 import { LoadingService } from './services/loading/loading.service';
 import { HeaderService } from './services/header/header.service';
+import { ToastService } from './services/toast/toast.service';
 
 @NgModule({
 
@@ -16,7 +18,8 @@ import { HeaderService } from './services/header/header.service';
 
 		HeaderComponent,
 		SideBarMenuComponent,
-		LoadingComponent
+		LoadingComponent,
+		ToastConfirmationComponent
 
 	], imports: [
 
@@ -27,13 +30,15 @@ import { HeaderService } from './services/header/header.service';
 	], exports: [
 
 		HeaderComponent,
-		LoadingComponent
+		LoadingComponent,
+		ToastConfirmationComponent
 		//IonicModule
 
 	], providers: [
 
 		LoadingService,
-		HeaderService
+		HeaderService,
+		ToastService
 
 	]
 

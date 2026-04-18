@@ -19,8 +19,8 @@
 <ion-content class="ion-padding">
 	@if (contextName) {
 
-		<div class="context-container">
-			<span class="context-tag">{{ contextName }}</span>
+		<div class="context-header">
+			<h1 class="context-title">{{ contextName }}</h1>
 			<p class="instruction-text">Select the standards to implement.</p>
 		</div>
 
@@ -40,7 +40,7 @@
 		<div class="footer-content ion-padding">
 			<p class="selection-summary" [class.muted]="!hasSelection">
 				<ion-icon [name]="hasSelection ? 'checkmark-circle' : 'alert-circle-outline'"></ion-icon>
-				{{ selectedCount }} items selected
+				{{ selectedCount }} practices selected
 			</p>
 			
 			<ion-button expand="block" [disabled]="!hasSelection" (click)="confirm()">

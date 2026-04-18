@@ -1,0 +1,56 @@
+.toast-wrapper {
+	position: fixed;
+	top: -100px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 9999;
+	transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	width: 90%;
+	max-width: 400px;
+
+	&.active { top: 60px; }
+
+	.glass-container {
+		background: rgba(15, 15, 15, 0.7);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 12px;
+		padding: 12px 20px;
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+		.close-btn {
+			background: transparent;
+			border: none;
+			color: rgba(255, 255, 255, 0.4);
+			margin-left: auto;
+			font-size: 1.2rem;
+			display: flex;
+			align-items: center;
+			cursor: pointer;
+			
+			&:active { color: #fff; }
+		}
+	}
+
+	.status-indicator {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: var(--ion-color-primary); // Default to cyberpunk blue
+		box-shadow: 0 0 10px var(--ion-color-primary);
+	}
+
+	&.done .status-indicator {
+		background: #00ff88; // Neon green for completion
+		box-shadow: 0 0 10px #00ff88;
+	}
+
+	.message {
+		color: #fff;
+		font-size: 0.9rem;
+		font-weight: 500;
+	}
+}

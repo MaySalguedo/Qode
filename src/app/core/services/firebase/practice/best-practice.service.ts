@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Firestore, collection, collectionData, addDoc, deleteDoc, updateDoc, doc, getDocs, getDoc, query, where, orderBy, limit } from '@angular/fire/firestore';
 
-import { BestPractice, BEST_PRACTICES_DATA } from '@entities/best-practice.entity';
+import { BestPractice } from '@entities/best-practice.entity';
 
 @Injectable({
 
