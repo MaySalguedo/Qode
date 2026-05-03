@@ -23,10 +23,12 @@
 }
 
 .brand-icon {
-  ion-icon {
-    font-size: 120px;
-    color: var(--ion-color-primary);
-    opacity: 0.8;
+  .custom-logo {
+    width: 220px;
+    height: 220px;
+    object-fit: contain;
+    
+    opacity: 0.8; 
   }
 }
 

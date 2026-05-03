@@ -1,10 +1,16 @@
-# Qode: GitHub Gist implementer & QR Scanner
+<div align="center">
+
+# Qode
 
 ![GitHub API Integration](https://img.shields.io/badge/GitHub-API-181717?style=for-the-badge&logo=github&logoColor=white)
 [![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.io)
 [![Ionic](https://img.shields.io/badge/Ionic-3880FF?style=for-the-badge&logo=ionic&logoColor=white)](https://ionicframework.com)
 [![Capacitor](https://img.shields.io/badge/Capacitor-119EFF?style=for-the-badge&logo=capacitor&logoColor=white)](https://capacitorjs.com/)
 ![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
+
+<img src="src/assets/img/qode_banner.png" alt="Qode">
+
+</div>
 
 ## Overview
 
@@ -64,15 +70,27 @@ src/
 <div align="center">
   <table>
     <tr>
-      <td align="center"><b>Home Screen</b></td>
-      <td align="center"><b>QR Scanner</b></td>
+      <td align="center"><b>Login Page</b></td>
+      <td align="center"><b>Auth Panel</b></td>
+      <td align="center"><b>Home Page</b></td>
+      <td align="center"><b>QR Modal</b></td>
+      <td align="center"><b>Practices Modal</b></td>
     </tr>
     <tr>
+	  <td>
+        <img src="src/assets/screenshots/qode_login.jpeg" alt="Qode Login Screen" width="300"/>
+      </td>
+	  <td>
+        <img src="src/assets/screenshots/qode_auth.jpeg" alt="Qode Auth Screen" width="300"/>
+      </td>
       <td>
         <img src="src/assets/screenshots/qode_home.jpeg" alt="Qode Home Screen" width="300"/>
       </td>
       <td>
         <img src="src/assets/screenshots/qode_qr.jpeg" alt="Qode QR Scanner" width="300"/>
+      </td>
+	  <td>
+        <img src="src/assets/screenshots/qode_practices.jpeg" alt="Qode QR Scanner" width="300"/>
       </td>
     </tr>
   </table>
