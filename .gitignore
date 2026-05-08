@@ -1,10 +1,6 @@
 src/environments/environment.ts
 src/environments/environment.prod.ts
 
-# Git Committer files
-committer.bat
-commit_body.txt
-
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
@@ -75,3 +71,10 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Firebase service account keys
+**/serviceAccount*.json
+**/firebase-adminsdk*.json
+**/*-adminsdk-*.json
+
+/qode-cloud-functions

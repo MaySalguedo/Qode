@@ -3,18 +3,8 @@
 	
 	<div class="home-container">
 
-		@if (isNativePlatform){
-
-			<ion-fab vertical="bottom" horizontal="end" slot="fixed">
-
-				<app-scanner-button (scannedContent)="onGistScanned($event)"></app-scanner-button>
-
-			</ion-fab>
-
-		}
-
 		@if (gists$ | async; as gists) {
-			
+
 			@if (gists.length > 0) {
 
 				<app-gists-grid [gists]="gists" [user_id]="currentUserId" (gistSelected)="onGistSelected($event)"></app-gists-grid>
@@ -43,5 +33,15 @@
 		}
 
 	</div>
+
+	@if (isNativePlatform){
+
+		<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+
+			<app-scanner-button (scannedContent)="onGistScanned($event)"></app-scanner-button>
+
+		</ion-fab>
+
+	}
 
 </ion-content>

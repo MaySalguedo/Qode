@@ -1,0 +1,22 @@
+:host {
+	--footer-bg: var(--ion-background-color, #ffffff);
+}
+
+ion-footer {
+	background: var(--footer-bg);
+	border-top: 1px solid var(--ion-color-step-150);
+}
+
+.footer-actions {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+	:host {
+		--footer-bg: var(--ion-color-step-100, #1e1e1e);
+	}
+}

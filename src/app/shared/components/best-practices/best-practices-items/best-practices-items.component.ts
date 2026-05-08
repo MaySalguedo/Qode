@@ -9,12 +9,13 @@ import { BestPracticeGroup } from '@models/best-practice-group.model';
 	styleUrls: ['./best-practices-items.component.scss'],
 	standalone: false
 
-})  export class BestPracticesItemsComponent implements OnInit {
+})	export class BestPracticesItemsComponent implements OnInit {
 
 	@Input() public section!: BestPracticeGroup;
 	@Input() public selectedIds: Set<string> = new Set<string>();
 	
 	@Output() public toggleOption = new EventEmitter<NonNullable<BestPractice['id']>>();
+	@Output() public viewGist = new EventEmitter<BestPractice>();
 
 	public constructor() {}
 
@@ -30,4 +31,9 @@ import { BestPracticeGroup } from '@models/best-practice-group.model';
 			this.toggleOption.emit(id);
 		}
 	}
+
+	public onViewGist(practice: BestPractice): void {
+		this.viewGist.emit(practice);
+	}
+
 }

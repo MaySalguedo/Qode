@@ -3,7 +3,7 @@ import { FirestoreEntity } from '@models/firestore-entity.model';
 
 export interface Session extends SessionEntity, Required<FirestoreEntity> {
 
-	status: 'WAITING' | 'GIST_RECEIVED' | 'ANALYZING' | 'DONE',
+	status: 'WAITING' | 'GIST_RECEIVED' | 'ANALYZING' | 'DONE' | 'FAILED' | 'REJECTED',
 	projectContext?: string
 
 }

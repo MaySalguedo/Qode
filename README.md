@@ -196,3 +196,27 @@ ionic cap run android -l --external
 </li>
 
 </ol>
+
+## ☁️ Cloud Functions Setup (Admin Features)
+
+Qode relies on Firebase Cloud Functions to manage administrator claims. Follow these steps to deploy the functions and bootstrap your first admin user.
+
+1. **Clone the Cloud Functions repository**  
+
+```bash
+git clone https://github.com/MaySalguedo/qode-cloud-functions.git
+cd qode-cloud-functions
+```
+
+2. **Install dependencies & link to your Firebase project**
+
+```bash
+npm install -g firebase-tools
+# Follow the instructions upon the qode-cloud-functions's README
+```
+
+3. **Deploy the function**
+
+```bash
+firebase deploy --only functions
+```

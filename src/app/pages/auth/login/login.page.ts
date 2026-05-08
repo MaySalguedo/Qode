@@ -123,8 +123,6 @@ import { DeviceCodeModalComponent } from '@components/device-code-modal/device-c
 	
 		if (credential?.accessToken) {
 
-			console.log(credential);
-
 			this.tokenService.setAccess(credential.accessToken);
 			this.router.navigate(['/home']);
 

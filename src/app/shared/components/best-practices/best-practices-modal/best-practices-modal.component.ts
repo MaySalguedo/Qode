@@ -1,6 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { BestPracticeService } from '@core/services/firebase/practice/best-practice.service';
+import { GistQrModalComponent } from '@components/gist/gist-qr-modal/gist-qr-modal.component';
+import { PracticeGroupingService } from '@shared/services/practice-grouping/practice-grouping.service';
+import { GithubService } from '@github/github.service';
+import { Gist } from '@entities/gist.entity';
+import { GistFile } from '@models/gist-file.model';
 import { BestPractice } from '@entities/best-practice.entity';
 import { BestPracticeGroup } from '@models/best-practice-group.model';
 
@@ -16,40 +20,56 @@ import { BestPracticeGroup } from '@models/best-practice-group.model';
 	@Input() public contextName: string = '';	
 	@Input() public practices: Array<BestPractice> = [];
 
-	public groupedSections: BestPracticeGroup[] = [];
+	public groupedSections: Array<BestPracticeGroup> = [];
 	public selectedIds = new Set<string>();
 
 	public constructor(
 		private modalController: ModalController,
-		private bestPracticeService: BestPracticeService
+		private practiceGroupingService: PracticeGroupingService,
+		private githubService: GithubService
 	) {}
 
 	public async ngOnInit(): Promise<void> {
-		//await this.loadPractices();
-		this.organizeData();
+		this.groupedSections = this.practiceGroupingService.groupByCategory(this.practices);
 	}
 
-	private async loadPractices(): Promise<void> {
-		this.practices = await this.bestPracticeService.findAll();
-	}
+	public async onViewPracticeGist(practice: BestPractice): Promise<void> {
+		if (!practice.gist) return;
 
-	private organizeData(): void {
-		const categories = [...new Set(this.practices.map(p => p.category))].sort();
-		
-		this.groupedSections = categories.map(cat => {
-			const catItems = this.practices.filter(p => p.category === cat);
-			const subCats = [...new Set(catItems.map(p => p.sub_category || 'General'))].sort();
-			
-			return {
-				category: cat.replace('_', ' '),
-				subGroups: subCats.map(sub => ({
-					name: sub,
-					items: catItems
-						.filter(p => (p.sub_category || 'General') === sub)
-						.sort((a, b) => a.name.localeCompare(b.name))
-				}))
-			};
-		});
+		try {
+
+			const gist = await this.githubService.getGist(practice.gist);
+
+			const readmeFile = Object.values(gist.files).find(
+				(f: GistFile) => f.filename.toLowerCase().includes('readme') && f.language === 'Markdown'
+			);
+
+			let readmeContent = readmeFile?.content;
+			if (readmeFile && !readmeContent) {
+				readmeContent = await this.githubService.getGistRawFileContent(readmeFile);
+			}
+
+			const modal = await this.modalController.create({
+
+				component: GistQrModalComponent,
+				componentProps: {
+					gistId: gist.id,
+					gistUrl: gist.html_url,
+					gistTitle: gist.description,
+					readmeContent: readmeContent,
+					practices: [],
+					previewOnly: true
+				},
+				breakpoints: [0, 0.75, 1],
+				initialBreakpoint: 0.75,
+				cssClass: 'gist-preview-modal'
+
+			});
+			await modal.present();
+
+		} catch (error) {
+			console.error('Error loading practice gist:', error);
+		}
 	}
 
 	get selectedCount(): number {

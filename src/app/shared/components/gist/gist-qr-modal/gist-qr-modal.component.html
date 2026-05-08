@@ -1,6 +1,6 @@
 <ion-content class="ion-padding ion-text-center qr-modal-content">
 
-	@if (isNativePlatform){
+	@if (isNativePlatform && !previewOnly){
 
 		<div class="scanner-container">
 			<app-scanner-button (scannedContent)="handleScan($event)"></app-scanner-button>
@@ -14,14 +14,18 @@
 		<p>{{ gistTitle }}</p>
 	</div>
 
-	<div class="qr-frame">
-		<qrcode 
-			[qrdata]="gistUrl" 
-			[width]="240" 
-			[errorCorrectionLevel]="'M'"
-			[margin]="2">
-		</qrcode>
-	</div>
+	@if (!previewOnly) {
+
+		<div class="qr-frame">
+			<qrcode 
+				[qrdata]="gistUrl" 
+				[width]="240" 
+				[errorCorrectionLevel]="'M'"
+				[margin]="2">
+			</qrcode>
+		</div>
+
+	}
 
 	<div class="url-box">
 		<ion-text color="medium">

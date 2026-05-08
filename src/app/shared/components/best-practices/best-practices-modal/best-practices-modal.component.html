@@ -30,7 +30,8 @@
 		<app-best-practices-items 
 			[section]="section"
 			[selectedIds]="selectedIds"
-			(toggleOption)="toggleOption($event)">
+			(toggleOption)="toggleOption($event)"
+			(viewGist)="onViewPracticeGist($event)">
 		</app-best-practices-items>
 	}
 </ion-content>

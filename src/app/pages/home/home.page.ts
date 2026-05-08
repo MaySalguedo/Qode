@@ -43,7 +43,8 @@ import { BestPractice } from '@entities/best-practice.entity';
 		private swalService: SwalService,
 		private sessionEventService: SessionEventService,
 		private sessionService: SessionService,
-		private bestPracticeService: BestPracticeService
+		private bestPracticeService: BestPracticeService,
+		private authService: AuthService
 
 	) {
 
@@ -157,6 +158,13 @@ import { BestPractice } from '@entities/best-practice.entity';
 				if (QodeSession.status === 'DONE') {
 
 					this.toastService.show('Implementations compleated.', 'DONE');
+					await this.sessionService.delete(source.id);
+
+				}
+
+				if (QodeSession.status === 'FAILED' || QodeSession.status === 'REJECTED') {
+
+					this.swalService.showException('Implementations', 'Implementations failed or rejected');
 					await this.sessionService.delete(source.id);
 
 				}

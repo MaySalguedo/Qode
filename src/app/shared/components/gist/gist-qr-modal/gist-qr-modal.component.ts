@@ -20,6 +20,7 @@ import { BestPractice } from '@entities/best-practice.entity';
 	@Input() public gistTitle!: string;
 	@Input() public readmeContent!: string;
 	@Input() public practices: Array<BestPractice> = [];
+	@Input() public previewOnly: boolean = false;
 
 	public constructor(
 
@@ -46,6 +47,11 @@ import { BestPractice } from '@entities/best-practice.entity';
 	}
 
 	public async handleScan(sessionId: string): Promise<void> {
+
+		if (this.previewOnly) {
+			this.dismiss();
+			return;
+		}
 
 		const bestPracticesModal = await this.modalController.create({
 
